@@ -45,7 +45,7 @@
         /* --- CURSOR PERSONALIZADO (Solo para computadoras) --- */
         @media (min-width: 993px) {
             body {
-                cursor: none; /* Escondemos el cursor original */
+                cursor: none;
             }
             a, button, .gallery-item, .carousel-item {
                 cursor: none;
@@ -61,7 +61,6 @@
                 z-index: 3000;
                 transition: width 0.2s, height 0.2s, background-color 0.2s;
             }
-            /* Cuando pasa sobre las fotos se agranda y muestra el reflejo */
             .custom-cursor.hovered {
                 width: 55px;
                 height: 55px;
@@ -85,7 +84,6 @@
             }
         }
 
-        /* Forzar ocultamiento del cursor dinámico en pantallas táctiles */
         @media (max-width: 992px) {
             .custom-cursor {
                 display: none !important;
@@ -331,7 +329,7 @@
 
         .carousel-track-container {
             width: 100%;
-            padding: 0 50px 25px; /* Espacio para la barra de scroll */
+            padding: 0 50px 25px;
             position: relative;
             display: flex;
             gap: 20px;
@@ -375,18 +373,16 @@
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
-        @media (max-width: 992px) {
-    /* ... otros estilos ... */
-    .carousel-item {
-        min-width: 290px; /* <- SE AJUSTÓ AQUÍ */
-        height: 220px;
-    }
-}
+        @media (min-width: 993px) {
+            .carousel-item {
+                transform-style: preserve-3d;
+            }
+        }
 
         .carousel-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* ¡CORRECCIÓN: Evita la distorsión de tus imágenes! */
+            object-fit: cover;
             display: block;
             transition: transform 0.4s ease;
         }
@@ -652,22 +648,31 @@
 
         /* --- AJUSTES RESPONSIVOS (CELULARES) --- */
         @media (max-width: 992px) {
+            header {
+                padding: 15px 20px;
+            }
             .about-section {
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 40px;
-                padding-top: 80px;
+                padding-top: 100px;
             }
             .about-image {
                 max-width: 450px;
                 margin: 0 auto;
             }
             .carousel-track-container {
-                padding: 0 20px 15px; /* Ajuste adaptado de espacio */
+                padding: 0 20px 15px; 
             }
+            /* ¡SOLUCIÓN CRÍTICA! En celular usamos anchura en base al porcentaje de pantalla y altura automática */
             .carousel-item {
-                min-width: 290px; /* ¡CORRECCIÓN: Proporción ideal para pantallas móviles! */
-                height: 220px;
+                min-width: 85%; 
+                height: auto; 
+                aspect-ratio: 3 / 2; /* Mantiene la proporción horizontal idéntica a tu cámara */
+            }
+            .carousel-item img {
+                object-fit: contain; /* Muestra la toma completa sin hacer zooms raros en el pasto */
+                background-color: #111; /* Relleno oscuro sutil por si acaso */
             }
         }
 
@@ -702,7 +707,6 @@
             }
             .stats-container {
                 grid-template-columns: 1fr;
-                gap: 15px;
             }
             .whatsapp-float {
                 bottom: 20px;
@@ -897,9 +901,9 @@
             // --- 1. CONFIGURACIÓN DEL TILT 3D (SOLO EN PC) ---
             if (!isMobile) {
                 VanillaTilt.init(document.querySelectorAll(".gallery-item, .carousel-item"), {
-                    max: 10,        // Grados máximos de inclinación
-                    speed: 400,     // Velocidad de retorno
-                    glare: true,    // Brillo reflectante activado
+                    max: 10,
+                    speed: 400,
+                    glare: true,
                     "max-glare": 0.3
                 });
             }
