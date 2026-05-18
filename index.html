@@ -47,7 +47,7 @@
             body {
                 cursor: none; /* Escondemos el cursor original */
             }
-            a, button, .gallery-item {
+            a, button, .gallery-item, .carousel-item {
                 cursor: none;
             }
             .custom-cursor {
@@ -322,12 +322,86 @@
             100% { transform: translateX(-50%); }
         }
 
+        /* --- SECCIÓN: CARRETE DESLIZANTE --- */
+        .coberturas-recientes {
+            padding: 100px 0 60px;
+            background-color: #080808;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .carousel-track-container {
+            width: 100%;
+            padding: 0 50px 25px; /* Espacio para que respire la barra de scroll */
+            position: relative;
+            display: flex;
+            gap: 20px;
+            overflow-x: auto; /* Deslizamiento habilitado */
+            scroll-snap-type: x mandatory;
+        }
+
+        /* --- ESTILOS DE LA BARRA DESLIZANTE ROJA (PC) --- */
+        .carousel-track-container::-webkit-scrollbar {
+            height: 6px; /* Grosor delgado y elegante */
+        }
+
+        .carousel-track-container::-webkit-scrollbar-track {
+            background: #111; 
+            border-radius: 10px;
+            margin: 0 50px;
+        }
+
+        .carousel-track-container::-webkit-scrollbar-thumb {
+            background: #ff3e3e; /* Tirador rojo brillante */
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .carousel-track-container::-webkit-scrollbar-thumb:hover {
+            background: #e03232;
+        }
+
+        /* Compatibilidad de la barra para navegador Firefox */
+        @supports (scrollbar-color: auto) {
+            .carousel-track-container {
+                scrollbar-width: thin;
+                scrollbar-color: #ff3e3e #111;
+            }
+        }
+
+        .carousel-item {
+            min-width: 450px;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #222;
+            scroll-snap-align: start;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            flex-shrink: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        @media (min-width: 993px) {
+            .carousel-item {
+                transform-style: preserve-3d;
+            }
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.04);
+        }
+
         /* --- SECCIÓN PORTAFOLIO --- */
         .portfolio {
             padding: 100px 50px 80px;
             max-width: 1400px;
             margin: 0 auto;
-            border-top: 1px solid #1a1a1a;
         }
 
         .section-title {
@@ -388,7 +462,7 @@
 
         @media (min-width: 993px) {
             .gallery {
-                transform-style: preserve-3d; /* Activa la aceleración 3D para PC */
+                transform-style: preserve-3d;
             }
         }
 
@@ -401,12 +475,7 @@
             border: 1px solid #1a1a1a;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        @media (min-width: 993px) {
-            .gallery-item {
-                transform-style: preserve-3d;
-            }
+            transform-style: preserve-3d;
         }
 
         .gallery-item.hide {
@@ -582,92 +651,74 @@
             100% { transform: scale(1.6); opacity: 0; }
         }
 
-        /* --- RESPONSIVO ADAPTABLE (MÓVILES Y TABLETS) --- */
+        /* --- AJUSTES RESPONSIVOS (CELULARES) --- */
         @media (max-width: 992px) {
-            header {
-                padding: 15px 20px;
-            }
             .about-section {
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 40px;
-                padding-top: 100px;
+                padding-top: 80px;
             }
             .about-image {
                 max-width: 450px;
                 margin: 0 auto;
             }
+            .carousel-track-container {
+                padding: 0 20px 15px;
+            }
+            .carousel-item {
+                min-width: 320px;
+                height: 220px;
+            }
         }
 
         @media (max-width: 768px) {
             header {
-                padding: 15px 10px;
+                padding: 20px;
                 flex-direction: column;
-                gap: 12px;
-                background-color: rgba(13, 13, 13, 0.98);
+                gap: 15px;
             }
             nav ul li {
-                margin: 0 8px;
-            }
-            nav ul li a {
-                font-size: 12px;
+                margin: 0 10px;
             }
             .hero h1 {
-                font-size: 36px;
+                font-size: 38px;
             }
             .hero p {
-                font-size: 15px;
-                line-height: 1.6;
+                font-size: 16px;
             }
-            .about-section, .portfolio {
-                padding: 60px 15px 30px;
+            .about-section, .portfolio, .coberturas-recientes {
+                padding: 60px 20px 40px;
             }
             .section-title {
-                font-size: 26px;
-                margin-bottom: 25px;
-            }
-            .filter-container {
-                gap: 8px;
+                font-size: 28px;
                 margin-bottom: 30px;
             }
-            .filter-btn {
-                padding: 8px 16px;
-                font-size: 11px;
-            }
             .gallery {
-                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 15px;
             }
             .gallery-item {
-                height: 250px;
+                height: 240px;
             }
-            /* Apilar contadores numéricos en vertical para pantallas pequeñas */
             .stats-container {
                 grid-template-columns: 1fr;
-                gap: 12px;
-                max-width: 280px;
-                margin: 30px auto 0;
-            }
-            .stat-item {
-                padding: 15px;
+                gap: 15px;
             }
             .whatsapp-float {
                 bottom: 20px;
                 right: 20px;
-                width: 52px;
-                height: 52px;
+                width: 55px;
+                height: 55px;
             }
             .whatsapp-float svg {
-                width: 26px;
-                height: 26px;
+                width: 28px;
+                height: 28px;
             }
             .lightbox-close {
                 top: 20px;
-                right: 25px;
-                font-size: 35px;
-            }
-            .lightbox-content {
-                max-width: 92%;
+                right: 20px;
+                font-size: 30px;
             }
         }
     </style>
@@ -750,6 +801,19 @@
         </div>
     </div>
 
+    <section class="coberturas-recientes">
+        <h2 class="section-title" data-aos="fade-up">Especial: Cobertura Liga 2</h2>
+        <div class="carousel-track-container" data-aos="fade-up">
+            <div class="carousel-item"><img src="IMG_5417.JPG.jpeg" alt="Árbitros y capitanes en el Estadio Hugo Sotil"></div>
+            <div class="carousel-item"><img src="IMG_5431.JPG.jpeg" alt="Hinchada y banderola de la Academia Cantolao"></div>
+            <div class="carousel-item"><img src="IMG_5435.JPG.jpeg" alt="Acción de juego de la Liga 2"></div>
+            <div class="carousel-item"><img src="IMG_5440.JPG.jpeg" alt="Disputa intensa por el balón en el campo"></div>
+            <div class="carousel-item"><img src="IMG_5451.JPG.jpeg" alt="Concentración de los futbolistas de la Liga 2"></div>
+            <div class="carousel-item"><img src="IMG_5461.JPG.jpeg" alt="Momento de fricción y tensión reglamentaria"></div>
+            <div class="carousel-item"><img src="IMG_5466.JPG.jpeg" alt="Celebración efusiva tras jugada clave"></div>
+        </div>
+    </section>
+
     <section id="portafolio" class="portfolio">
         <h2 class="section-title" data-aos="fade-up">Mi Trabajo</h2>
         
@@ -829,12 +893,11 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- DETECTAR SI ES CELULAR O PC ---
             const isMobile = window.matchMedia("(max-width: 992px)").matches;
 
             // --- 1. CONFIGURACIÓN DEL TILT 3D (SOLO EN PC) ---
             if (!isMobile) {
-                VanillaTilt.init(document.querySelectorAll(".gallery-item"), {
+                VanillaTilt.init(document.querySelectorAll(".gallery-item, .carousel-item"), {
                     max: 10,        // Grados máximos de inclinación
                     speed: 400,     // Velocidad de retorno
                     glare: true,    // Brillo reflectante activado
@@ -845,7 +908,7 @@
             // --- 2. LOGICA DEL VISOR LIGHTBOX (PANTALLA COMPLETA) ---
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
-            const galleryImages = document.querySelectorAll('.gallery-item img');
+            const galleryImages = document.querySelectorAll('.gallery-item img, .carousel-item img');
             const closeLightbox = document.getElementById('lightbox-close');
 
             galleryImages.forEach(img => {
@@ -931,7 +994,7 @@
                     cursor.style.top = e.clientY + 'px';
                 });
 
-                document.querySelectorAll('.gallery-item').forEach(item => {
+                document.querySelectorAll('.gallery-item, .carousel-item').forEach(item => {
                     item.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
                     item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
                 });
