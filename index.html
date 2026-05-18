@@ -375,11 +375,13 @@
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
-        @media (min-width: 993px) {
-            .carousel-item {
-                transform-style: preserve-3d;
-            }
-        }
+        @media (max-width: 992px) {
+    /* ... otros estilos ... */
+    .carousel-item {
+        min-width: 290px; /* <- SE AJUSTÓ AQUÍ */
+        height: 220px;
+    }
+}
 
         .carousel-item img {
             width: 100%;
