@@ -61,6 +61,7 @@
                 z-index: 3000;
                 transition: width 0.2s, height 0.2s, background-color 0.2s;
             }
+            /* Cuando pasa sobre las fotos se agranda y muestra el reflejo */
             .custom-cursor.hovered {
                 width: 55px;
                 height: 55px;
@@ -321,7 +322,7 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* --- SECCIÓN: CARRETE DESLIZANTE OPTIMIZADO --- */
+        /* --- SECCIÓN: CARRETE DESLIZANTE --- */
         .coberturas-recientes {
             padding: 100px 0 60px;
             background-color: #080808;
@@ -330,7 +331,7 @@
 
         .carousel-track-container {
             width: 100%;
-            padding: 0 50px 25px;
+            padding: 0 50px 25px; /* Espacio para la barra de scroll */
             position: relative;
             display: flex;
             gap: 20px;
@@ -383,7 +384,7 @@
         .carousel-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* ¡Evita que las fotos se estiren o distorsionen! */
+            object-fit: cover; /* ¡CORRECCIÓN: Evita la distorsión de tus imágenes! */
             display: block;
             transition: transform 0.4s ease;
         }
@@ -649,24 +650,21 @@
 
         /* --- AJUSTES RESPONSIVOS (CELULARES) --- */
         @media (max-width: 992px) {
-            header {
-                padding: 15px 20px;
-            }
             .about-section {
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 40px;
-                padding-top: 100px;
+                padding-top: 80px;
             }
             .about-image {
                 max-width: 450px;
                 margin: 0 auto;
             }
             .carousel-track-container {
-                padding: 0 20px 15px; /* Ajuste para celular */
+                padding: 0 20px 15px; /* Ajuste adaptado de espacio */
             }
             .carousel-item {
-                min-width: 290px; /* Tamaño ideal de carrete para celular */
+                min-width: 290px; /* ¡CORRECCIÓN: Proporción ideal para pantallas móviles! */
                 height: 220px;
             }
         }
@@ -803,13 +801,13 @@
     <section class="coberturas-recientes">
         <h2 class="section-title" data-aos="fade-up">Especial: Cobertura Liga 2</h2>
         <div class="carousel-track-container" data-aos="fade-up">
-            <div class="carousel-item"><img src="IMG_5417.JPG.jpeg" alt="Árbitros y capitanes en el Estadio Hugo Sotil"></div>
-            <div class="carousel-item"><img src="IMG_5431.JPG.jpeg" alt="Hinchada y banderola de la Academia Cantolao"></div>
-            <div class="carousel-item"><img src="IMG_5435.JPG.jpeg" alt="Acción de juego de la Liga 2"></div>
-            <div class="carousel-item"><img src="IMG_5440.JPG.jpeg" alt="Disputa intensa por el balón en el campo"></div>
-            <div class="carousel-item"><img src="IMG_5451.JPG.jpeg" alt="Concentración de los futbolistas de la Liga 2"></div>
-            <div class="carousel-item"><img src="IMG_5461.JPG.jpeg" alt="Momento de fricción y tensión reglamentaria"></div>
-            <div class="carousel-item"><img src="IMG_5466.JPG.jpeg" alt="Celebración efusiva tras jugada clave"></div>
+            <div class="carousel-item"><img src="IMG_5417.JPG.jpg" alt="Árbitros y capitanes en el Estadio Hugo Sotil"></div>
+            <div class="carousel-item"><img src="IMG_5431.JPG.jpg" alt="Hinchada y banderola de la Academia Cantolao"></div>
+            <div class="carousel-item"><img src="IMG_5435.JPG.jpg" alt="Acción de juego de la Liga 2"></div>
+            <div class="carousel-item"><img src="IMG_5440.JPG.jpg" alt="Disputa intensa por el balón en el campo"></div>
+            <div class="carousel-item"><img src="IMG_5451.JPG.jpg" alt="Concentración de los futbolistas de la Liga 2"></div>
+            <div class="carousel-item"><img src="IMG_5461.JPG.jpg" alt="Momento de fricción y tensión reglamentaria"></div>
+            <div class="carousel-item"><img src="IMG_5466.JPG.jpg" alt="Celebración efusiva tras jugada clave"></div>
         </div>
     </section>
 
