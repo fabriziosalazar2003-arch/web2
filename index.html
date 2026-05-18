@@ -61,7 +61,6 @@
                 z-index: 3000;
                 transition: width 0.2s, height 0.2s, background-color 0.2s;
             }
-            /* Cuando pasa sobre las fotos se agranda y muestra el reflejo */
             .custom-cursor.hovered {
                 width: 55px;
                 height: 55px;
@@ -322,7 +321,7 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* --- SECCIÓN: CARRETE DESLIZANTE --- */
+        /* --- SECCIÓN: CARRETE DESLIZANTE OPTIMIZADO --- */
         .coberturas-recientes {
             padding: 100px 0 60px;
             background-color: #080808;
@@ -331,36 +330,31 @@
 
         .carousel-track-container {
             width: 100%;
-            padding: 0 50px 25px; /* Espacio para que respire la barra de scroll */
+            padding: 0 50px 25px;
             position: relative;
             display: flex;
             gap: 20px;
-            overflow-x: auto; /* Deslizamiento habilitado */
+            overflow-x: auto;
             scroll-snap-type: x mandatory;
         }
 
-        /* --- ESTILOS DE LA BARRA DESLIZANTE ROJA (PC) --- */
+        /* Diseño de la barra de scroll horizontal */
         .carousel-track-container::-webkit-scrollbar {
-            height: 6px; /* Grosor delgado y elegante */
+            height: 6px;
         }
 
         .carousel-track-container::-webkit-scrollbar-track {
-            background: #111; 
+            background: #111;
             border-radius: 10px;
             margin: 0 50px;
         }
 
         .carousel-track-container::-webkit-scrollbar-thumb {
-            background: #ff3e3e; /* Tirador rojo brillante */
+            background: #ff3e3e;
             border-radius: 10px;
             cursor: pointer;
         }
 
-        .carousel-track-container::-webkit-scrollbar-thumb:hover {
-            background: #e03232;
-        }
-
-        /* Compatibilidad de la barra para navegador Firefox */
         @supports (scrollbar-color: auto) {
             .carousel-track-container {
                 scrollbar-width: thin;
@@ -389,7 +383,8 @@
         .carousel-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* ¡Evita que las fotos se estiren o distorsionen! */
+            display: block;
             transition: transform 0.4s ease;
         }
 
@@ -402,6 +397,7 @@
             padding: 100px 50px 80px;
             max-width: 1400px;
             margin: 0 auto;
+            border-top: 1px solid #1a1a1a;
         }
 
         .section-title {
@@ -653,21 +649,24 @@
 
         /* --- AJUSTES RESPONSIVOS (CELULARES) --- */
         @media (max-width: 992px) {
+            header {
+                padding: 15px 20px;
+            }
             .about-section {
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 40px;
-                padding-top: 80px;
+                padding-top: 100px;
             }
             .about-image {
                 max-width: 450px;
                 margin: 0 auto;
             }
             .carousel-track-container {
-                padding: 0 20px 15px;
+                padding: 0 20px 15px; /* Ajuste para celular */
             }
             .carousel-item {
-                min-width: 320px;
+                min-width: 290px; /* Tamaño ideal de carrete para celular */
                 height: 220px;
             }
         }
@@ -748,7 +747,7 @@
 
     <section id="sobre-mi" class="about-section">
         <div class="about-image" data-aos="fade-right">
-           <img src="5AA91396-F757-4692-AA5F-7246A26AAB20.JPG.jpeg" alt="Fabrizio - Fotógrafo Deportivo Profesional">
+           <img src="5AA91396-F757-4692-AA5F-7246A26AAB20.JPG.jpg" alt="Fabrizio - Fotógrafo Deportivo Profesional">
         </div>
         <div class="about-content" data-aos="fade-left">
             <h2>Hola, soy <span>Fabrizio</span></h2>
@@ -905,7 +904,7 @@
                 });
             }
 
-            // --- 2. LOGICA DEL VISOR LIGHTBOX (PANTALLA COMPLETA) ---
+            // --- 2. LOGICA DEL VISOR LIGHTBOX ---
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const galleryImages = document.querySelectorAll('.gallery-item img, .carousel-item img');
