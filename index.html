@@ -51,6 +51,14 @@
             z-index: 2500;
             transition: width 0.1s ease-out;
         }
+    .contact-form-section { padding: 100px 20px; background-color: #0d0d0d; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .contact-form { max-width: 600px; width: 100%; margin: 0 auto; text-align: left; }
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 15px; background: #161616; border: 1px solid #222; color: #fff; border-radius: 4px; outline: none; transition: border 0.3s; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #ff3e3e; }
+        input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+        .btn-form { width: 100%; background-color: #ff3e3e; color: #fff; border: none; padding: 15px; border-radius: 4px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: background 0.3s; margin-top: 10px; }
+        .btn-form:hover { background-color: #e03232; }
 
         /* --- CURSOR PERSONALIZADO (Solo para computadoras) --- */
         @media (min-width: 993px) {
@@ -874,6 +882,59 @@
         <p data-aos="fade-up">Disponible para cobertura de clubes, torneos, marcas y sesiones privadas.</p>
         <a href="https://wa.me/51977370932?text=Hola%20Fabrizio,%20vi%20tu%20p%C3%A1gina%20web%20y%20me%20gustar%C3%ADa%20cotizar%20una%20cobertura%20fotogr%C3%A1fica." target="_blank" class="btn" data-aos="zoom-in">Escríbeme por WhatsApp</a>
     </section>
+    <section id="contacto" class="contact-form-section">
+
+        <h2 class="section-title" data-aos="fade-up">Solicitar Cotización</h2>
+
+        <form class="contact-form" data-aos="fade-up" action="https://formspree.io/f/xgoqolgj" method="POST">
+
+            <div class="form-group">
+
+                <input type="text" name="nombre" placeholder="Nombre completo" required>
+
+            </div>
+
+            <div class="form-group">
+
+                <input type="email" name="email" placeholder="Correo electrónico" required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label style="color: #aaa; font-size: 12px; margin-bottom: 5px; display: block;">Fecha del evento:</label>
+
+                <input type="date" name="fecha" required>
+
+            </div>
+
+            <div class="form-group">
+
+                <select name="servicio" required>
+
+                    <option value="" disabled selected>Tipo de evento</option>
+
+                    <option value="cobertura-futbol">Cobertura de Fútbol</option>
+
+                    <option value="cobertura-voley">Cobertura de Vóley</option>
+
+                    <option value="sesion-privada">Sesión Deportiva Privada</option>
+
+                    <option value="sesion-privada">Otro tipo de evento</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <textarea name="mensaje" rows="5" placeholder="Cuéntame los detalles del evento" required></textarea>
+
+            </div>
+
+            <button type="submit" class="btn-form">Enviar Solicitud</button>
+
+        </form> 
 
     <section class="social-section">
         <p>Sígueme en mis redes</p>
