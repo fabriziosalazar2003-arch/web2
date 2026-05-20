@@ -796,53 +796,31 @@
         }
 
         @media (max-width: 768px) {
-            header {
-                padding: 20px;
-                flex-direction: column;
-                gap: 15px;
-            }
-            nav ul li {
-                margin: 0 10px;
-            }
-            .hero h1 {
-                font-size: 38px;
-            }
-            .hero p {
-                font-size: 16px;
-            }
-            .about-section, .portfolio, .coberturas-recientes {
-                padding: 60px 20px 40px;
-            }
-            .section-title {
-                font-size: 28px;
-                margin-bottom: 30px;
-            }
-            .gallery {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 15px;
-            }
-            .gallery-item {
-                height: 240px;
-            }
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-            .whatsapp-float {
-                bottom: 20px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
-            }
-            .whatsapp-float svg {
-                width: 28px;
-                height: 28px;
-            }
-            .lightbox-close {
-                top: 20px;
-                right: 20px;
-                font-size: 30px;
-            }
-        }
+    header {
+        padding: 10px; /* Reducimos el padding del header */
+    }
+    .logo {
+        font-size: 18px; /* Reducimos un poco el logo */
+        margin-bottom: 5px;
+    }
+    nav ul {
+        justify-content: center; /* Centramos el menú */
+        flex-wrap: wrap; /* Permitimos que salte de línea si es necesario */
+    }
+    nav ul li {
+        margin-left: 10px; /* Reducimos el margen entre enlaces */
+    }
+    nav ul li a {
+        font-size: 11px; /* Reducimos la fuente del menú */
+    }
+    .hero {
+        padding-top: 80px; /* Esto empuja el contenido hacia abajo para que no lo tape el menú fijo */
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 32px; /* Ajustamos el título para que respire */
+    }
+}
     </style>
    <style>
 /* Forzamos que las imágenes ocupen todo el espacio sin recortarse */
@@ -915,16 +893,16 @@
 }
 
 .slider-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: col-resize;
-    z-index: 10;
+   position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    opacity: 0; 
+    cursor: col-resize; 
+    z-index: 10; 
+    touch-action: pan-y; /* ESTO ES LO QUE HACE QUE SE DESLICE EN MÓVIL */
 }
-
 </style>
 </head>
 <body>
