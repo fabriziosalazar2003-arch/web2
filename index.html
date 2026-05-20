@@ -18,6 +18,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twentytwenty/1.0/css/twentytwenty.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twentytwenty/1.0/css/twentytwenty.css">
     
     <style>
         /* --- ESTILOS GLOBALES --- */
@@ -59,6 +61,104 @@
         input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
         .btn-form { width: 100%; background-color: #ff3e3e; color: #fff; border: none; padding: 15px; border-radius: 4px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: background 0.3s; margin-top: 10px; }
         .btn-form:hover { background-color: #e03232; }
+        /* --- BOTÓN VOLVER ARRIBA --- */
+.back-to-top {
+    position: fixed;
+    bottom: 35px;
+    left: 30px; /* Se coloca a la izquierda porque WhatsApp está a la derecha */
+    background-color: #111;
+    border: 1px solid #222;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: #ff3e3e;
+    border-color: #ff3e3e;
+    transform: translateY(-3px);
+}
+
+.back-to-top svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+}
+
+/* --- BARRA LATERAL DE COMPARTIR --- */
+.share-sidebar {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(17, 17, 17, 0.9);
+    border: 1px solid #222;
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    padding: 15px 8px;
+    gap: 15px;
+    z-index: 1500;
+    backdrop-filter: blur(5px);
+}
+
+.share-label {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #666;
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    align-self: center;
+}
+
+.share-sidebar a, .share-sidebar button {
+    background: none;
+    border: none;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s, fill 0.2s;
+}
+
+.share-sidebar svg {
+    width: 20px;
+    height: 20px;
+    fill: #aaa;
+}
+
+.share-sidebar a:hover svg, .share-sidebar button:hover svg {
+    fill: #ff3e3e;
+}
+
+.share-sidebar a:hover, .share-sidebar button:hover {
+    transform: scale(1.1);
+}
+
+/* Ocultar barra lateral en celulares muy pequeños para no estorbar el contenido */
+@media (max-width: 480px) {
+    .share-sidebar {
+        display: none;
+    }
+}
 
         /* --- CURSOR PERSONALIZADO (Solo para computadoras) --- */
         @media (min-width: 993px) {
@@ -744,6 +844,88 @@
             }
         }
     </style>
+   <style>
+/* Forzamos que las imágenes ocupen todo el espacio sin recortarse */
+.twentytwenty-container {
+    display: block;
+    overflow: hidden;
+}
+
+.twentytwenty-container img {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+}
+
+/* Estilo del botón del deslizador (el circulo con flechas) */
+.twentytwenty-handle {
+    background: #ff3e3e !important;
+    border: 3px solid #fff !important;
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.twentytwenty-horizontal .twentytwenty-handle:before, 
+.twentytwenty-horizontal .twentytwenty-handle:after {
+    background: #fff !important;
+}
+</style>
+<style>
+/* ANTES Y DESPUES */
+.slider-container {
+    width: 100%;
+    max-width: 600px; /* Aumenté el ancho para que se vea más grande */
+    margin: 20px auto;
+}
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9/16; /* Ajusta esto según la proporción de tus fotos */ /* IMPORTANTE: Deja que el navegador calcule la altura */
+    overflow: hidden;
+    border: 2px solid #333;
+    display: flex; /* Ayuda a centrar */
+}
+.slider-img {
+    width: 100%;
+    height: auto; /* IMPORTANTE: Mantiene la proporción original de tu foto */
+    display: block;
+    position: relative; /* Cambiado para que no se superpongan fuera de lugar */
+}
+.slider-after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%; /* Esto se moverá con el slider */
+    height: 100%;
+    overflow: hidden;
+    border-right: 3px solid #ff3e3e;
+    pointer-events: none; /* Permite que el input reciba el click */
+}
+
+/* Esta es la imagen dentro de la capa del "después" */
+
+.slider-after img {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+.slider-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: col-resize;
+    z-index: 10;
+}
+
+</style>
 </head>
 <body>
 
@@ -757,6 +939,7 @@
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#sobre-mi">Sobre Mí</a></li>
                 <li><a href="#portafolio">Portafolio</a></li>
+                <li><a href="#edicion">Edición</a></li> 
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
@@ -779,7 +962,7 @@
             
             <div class="stats-container">
                 <div class="stat-item">
-                    <span class="stat-number" data-target="2">0</span>
+                    <span class="stat-number" data-target="3">0</span>
                     <span class="stat-label">Años de Exp.</span>
                 </div>
                 <div class="stat-item">
@@ -787,7 +970,7 @@
                     <span class="stat-label">Ligas Coberturadas</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number" data-target="1500">0</span>
+                    <span class="stat-number" data-target="2500">0</span>
                     <span class="stat-label">Fotos Entregadas</span>
                 </div>
             </div>
@@ -876,7 +1059,19 @@
         <span class="lightbox-close" id="lightbox-close">&times;</span>
         <img class="lightbox-content" id="lightbox-img" src="" alt="Visor de imagen">
     </div>
-
+  <section id="edicion" style="padding: 100px 20px; background-color: #0d0d0d; display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <h2 class="section-title">ANTES Y DESPUÉS</h2>
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                <img src="57de47f6-3e04-49d8-b12c-12e7ddceea7e.jfif" class="slider-img" alt="Antes">
+                <div class="slider-after">
+                    <img src="bb077153-76a6-4a48-be40-4032fe0021f6.jfif" class="slider-img" alt="Después">
+                </div>
+                <input type="range" min="0" max="100" value="50" class="slider-input">
+            </div>
+        </div>
+    </section>
+    </div>
     <section id="contacto" class="contact">
         <h2 class="section-title" data-aos="fade-up">¿Tienes un evento o partido?</h2>
         <p data-aos="fade-up">Disponible para cobertura de clubes, torneos, marcas y sesiones privadas.</p>
@@ -1075,6 +1270,42 @@
                     item.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
                 });
             }
+            // --- LOGICA DEL BOTÓN VOLVER ARRIBA ---
+const backToTopBtn = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    // El botón aparece cuando el usuario baja más de 400 píxeles
+    if (window.scrollY > 400) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
+    }
+});
+
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Sube de manera fluida y suave
+    });
+});
+
+// --- LOGICA PARA COMPARTIR REDES SOCIALES ---
+const currentUrl = encodeURIComponent(window.location.href);
+const shareText = encodeURIComponent("¡Mira el portafolio de fotografía deportiva de Fabrizio Content!");
+
+
+// Enlaces dinámicos
+document.getElementById('shareFB').href = `https://www.facebook.com/share/14Y2RcEqd8J/?mibextid=wwXIfr`;
+document.getElementById('shareThreads').href = `https://threads.net/intent/post?text=${shareText}%20${currentUrl}`;
+
+// Copiar enlace al portapapeles
+document.getElementById('copyLink').addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("¡Enlace copiado al portapapeles! Listo para compartir.");
+    }).catch(err => {
+        console.error('Error al copiar el enlace: ', err);
+    });
+});
 
             // --- 6. LÓGICA DE LA BARRA DE PROGRESO DE LECTURA ---
             window.addEventListener('scroll', () => {
@@ -1089,5 +1320,45 @@
 
         });
     </script>
+    <button id="backToTop" class="back-to-top" title="Volver arriba">
+    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+</button>
+
+<div class="share-sidebar">
+    <span class="share-label">COMPARTIR</span>
+    <a href="https://www.facebook.com/share/14Y2RcEqd8J/?mibextid=wwXIfr" target="_blank" title="Compartir en Facebook">
+        <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+    </a>
+    <a href="https://www.threads.net/@fabrizio_salazar07" target="_blank" id="shareThreads" title="Compartir en Threads">
+        <svg viewBox="0 0 24 24"><path d="M14.322 11.875c-.244-.06-.412-.26-.412-.511V9.5a2.5 2.5 0 0 0-5 0v1.864c0 .25-.168.451-.412.511A3.492 3.492 0 0 0 6 15.334c0 2.454 2.146 4.166 4.5 4.166 1.455 0 2.85-.712 3.5-1.834.65 1.122 2.045 1.834 3.5 1.834 2.354 0 4.5-1.712 4.5-4.166a3.492 3.492 0 0 0-2.5-3.459zM11.41 9.5a1 1 0 0 1 2 0v1.364a3.473 3.473 0 0 0-2 0zm-.91 5.834a1.942 1.942 0 0 1-2-1.834c0-1.125.964-1.834 2-1.834s2 .709 2 1.834c0 .991-.9 1.834-2 1.834zm5 0c-1.1 0-2-.843-2-1.834 0-1.125.964-1.834 2-1.834s2 .709 2 1.834c0 .991-.9 1.834-2 1.834zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21c-4.963 0-9-4.037-9-9s4.037-9 9-9 9 4.037 9 9-4.037 9-9 9z"/></svg>
+    </a>
+    <button id="copyLink" title="Copiar enlace de la web">
+        <svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+    </button>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twentytwenty/1.0/js/jquery.event.move.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twentytwenty/1.0/js/jquery.twentytwenty.js"></script>
+
+<script>
+    $(window).on('load', function() {
+        $(".twentytwenty-container").twentytwenty({
+            default_offset_pct: 0.5, // Empieza a la mitad
+            orientation: 'horizontal' // 'vertical' o 'horizontal'
+        });
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    
+    <script>
+        AOS.init({ duration: 900, once: true });
+        
+        // Logica Slider
+        document.querySelector('.slider-input').addEventListener('input', (e) => {
+            document.querySelector('.slider-after').style.width = e.target.value + "%";
+        });
+</script>
 </body>
 </html>
