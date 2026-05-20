@@ -1075,10 +1075,9 @@
                 <div class="slider-after">
                     <img src="bb077153-76a6-4a48-be40-4032fe0021f6.jfif" class="slider-img" alt="Después">
                 </div>
-                <div class="slider-hint">
-        <div class="hand-icon">👆</div>
-        <p>MANTENER PRESIONADO Y DESLIZAR PARA VER EDICIÓN</p>
-    </div>
+            <div class="slider-handle">
+                <div class="handle-icon">↔</div>
+            </div>
                 <input type="range" min="0" max="100" value="50" class="slider-input">
             </div>
         </div>
@@ -1371,6 +1370,17 @@ document.getElementById('copyLink').addEventListener('click', () => {
         document.querySelector('.slider-input').addEventListener('input', (e) => {
             document.querySelector('.slider-after').style.width = e.target.value + "%";
         });
+</script>
+<script>
+const input = document.querySelector('.slider-input');
+const after = document.querySelector('.slider-after');
+const handle = document.querySelector('.slider-handle');
+
+input.addEventListener('input', (e) => {
+    let val = e.target.value;
+    after.style.width = val + "%";
+    handle.style.left = val + "%";
+});
 </script>
 </body>
 </html>
